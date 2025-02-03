@@ -1,0 +1,62 @@
+sensor &t0 container1 @phase-fabric
+jump 22 greaterThanEq &t0 10
+set &rwaitForUnit:4:0 4
+jump 45 always
+ucontrol itemDrop @air 99
+ulocate building core 0 @copper &_ &_ &_ core:47:17
+sensor x:23:24 core:47:17 @x
+sensor y:23:35 core:47:17 @y
+set &rmoveToPosition:23:0 10
+jump 55 always
+wait 2
+ucontrol itemTake core:47:17 @phase-fabric 30
+wait 2
+sensor x:23:24 container1 @x
+sensor y:23:35 container1 @y
+set &rmoveToPosition:23:0 17
+jump 55 always
+wait 2
+ucontrol itemDrop container1 30
+wait 2
+ucontrol flag 0
+ucontrol unbind
+sensor &t1 container1 @silicon
+jump 44 greaterThanEq &t1 10
+set &rwaitForUnit:4:0 26
+jump 45 always
+ucontrol itemDrop @air 99
+ulocate building core 0 @copper &_ &_ &_ core:72:17
+sensor x:23:24 core:72:17 @x
+sensor y:23:35 core:72:17 @y
+set &rmoveToPosition:23:0 32
+jump 55 always
+wait 2
+ucontrol itemTake core:72:17 @silicon 30
+wait 2
+sensor x:23:24 container1 @x
+sensor y:23:35 container1 @y
+set &rmoveToPosition:23:0 39
+jump 55 always
+wait 2
+ucontrol itemDrop container1 30
+wait 2
+ucontrol flag 0
+ucontrol unbind
+end
+set flag:5:10 @flag
+set unit:6:10 @unit
+ubind @poly
+sensor isAlreadyBound:10:14 unit:6:10 flag:5:10
+jump 52 strictEqual isAlreadyBound:10:14 1
+ucontrol flag 1
+jump 53 always
+jump 47 always
+set &fwaitForUnit:4:0 null
+set @counter &rwaitForUnit:4:0
+ucontrol within x:23:24 y:23:35 5 isWithin:25:14 0
+jump 60 notEqual isWithin:25:14 0
+ucontrol move x:23:24 y:23:35
+wait 1
+jump 55 always
+set &fmoveToPosition:23:0 null
+set @counter &rmoveToPosition:23:0
